@@ -351,11 +351,11 @@ This project includes a custom Django management command to verify that essentia
 ---
 ## 📌 Project Roadmap
 
-- [X] **`Core Functionality`**: <strike>Implement RTSP to HLS transcoding and web playback.</strike>
-- [X] **`Containerization`**: <strike>Set up Docker and Docker Compose for all services.</strike>
-- [ ] **`Multi-Stream Support`**: Enhance the UI and backend to manage multiple concurrent streams.
-- [ ] **`Authentication`**: Add user authentication to secure access to the streaming platform.
-- [ ] **`Improved Error Handling`**: Implement more robust error handling and feedback on the frontend.
+- [X] **`Core Functionality`**: <strike>Implement RTSP to HLS transcoding and web playback.
+- [X] **`Containerization`**: <strike>Set up Docker and Docker Compose for all services.
+- [X] **`Multi-Stream Support`**: Enhance the UI and backend to manage multiple concurrent streams.
+- [X] **`Authentication`**: Add user authentication to secure access to the streaming platform.
+- [X] **`Improved Error Handling`**: Implement more robust error handling and feedback on the frontend.
 
 ---
 
