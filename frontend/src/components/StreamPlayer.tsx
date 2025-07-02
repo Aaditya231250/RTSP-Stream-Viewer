@@ -77,22 +77,22 @@ export function StreamPlayer({ streamId, onRemove }: StreamPlayerProps) {
           
           hlsRef.current = hls
           
-          hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          hls.on('hlsManifestParsed', () => {
             console.log(`HLS initialized for stream: ${streamId}`)
             setHlsReady(true)
             setError(null)
           })
           
-          hls.on(Hls.Events.ERROR, (event, data) => {
+          hls.on('hlsError', (_event: any, data: any) => {
             if (data.fatal) {
               console.error(`Fatal HLS error: ${data.type} - ${data.details}`)
               setError(`Playback error: ${data.details}`)
               
               switch (data.type) {
-                case Hls.ErrorTypes.NETWORK_ERROR:
+                case 'networkError':
                   hls.startLoad()
                   break
-                case Hls.ErrorTypes.MEDIA_ERROR:
+                case 'mediaError':
                   hls.recoverMediaError()
                   break
                 default:
@@ -103,16 +103,18 @@ export function StreamPlayer({ streamId, onRemove }: StreamPlayerProps) {
           })
           
           hls.loadSource(hlsUrl)
-          hls.attachMedia(videoRef.current)
+          if (videoRef.current) {
+            hls.attachMedia(videoRef.current)
+          }
           
-        } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
+        } else if (videoRef.current?.canPlayType('application/vnd.apple.mpegurl')) {
           console.log(`Using native HLS for stream: ${streamId}`)
           videoRef.current.src = hlsUrl
           setHlsReady(true)
         } else {
           setError('HLS not supported in this browser')
         }
-      }).catch((err) => {
+      }).catch(() => {
         console.error('HLS.js loading failed')
         setError('Video playback engine missing')
       })
@@ -132,7 +134,7 @@ export function StreamPlayer({ streamId, onRemove }: StreamPlayerProps) {
     if (isPlaying) {
       videoRef.current.pause()
     } else {
-      videoRef.current.play().catch((err) => {
+      videoRef.current.play().catch(() => {
         console.error('Playback failed')
         setError('Failed to start playback')
       })

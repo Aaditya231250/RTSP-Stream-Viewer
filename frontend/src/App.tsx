@@ -20,8 +20,6 @@ function App() {
   
   const { isConnected, lastMessage, addStream, removeStream } = useWebSocket(WS_URL)
   const { 
-    streams, 
-    connectionStatus, 
     addStream: addStreamToStore, 
     updateStreamStatus, 
     addStreamChunk, 
