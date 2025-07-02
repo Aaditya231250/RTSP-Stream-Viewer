@@ -1,0 +1,34 @@
+services:
+  backend:
+    build: ./backend
+    container_name: rtsp-backend
+    ports:
+      - "8000:8000"
+    #volumes:
+    #  - ./backend:/app
+    environment:
+      - DEBUG=0
+      - REDIS_URL=redis://redis:6379
+      - DJANGO_SETTINGS_MODULE=streamviewer.settings
+    depends_on:
+      - redis
+
+  frontend:
+    build: ./frontend
+    container_name: rtsp-frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules  
+    environment:
+      - VITE_BACKEND_URL=https://rtsp-backend-88322650503.us-central1.run.app
+      - VITE_WS_URL=wss://rtsp-backend-88322650503.us-central1.run.app/ws/stream/
+    depends_on:
+      - backend
+
+  redis:
+    image: redis:7-alpine
+    container_name: rtsp-redis
+    ports:
+      - "6379:6379"
