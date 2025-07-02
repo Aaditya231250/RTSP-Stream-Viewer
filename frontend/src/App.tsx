@@ -8,12 +8,6 @@ import { StreamPlayer } from './components/StreamPlayer'
 const WS_URL = import.meta.env.VITE_WS_URL || "wss://rtsp-backend-88322650503.us-central1.run.app/ws/stream/"
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "https://rtsp-backend-88322650503.us-central1.run.app"
 
-console.log('🔍 Environment variables:')
-console.log('VITE_WS_URL:', import.meta.env.VITE_WS_URL)
-console.log('VITE_BACKEND_URL:', import.meta.env.VITE_BACKEND_URL)
-console.log('Using WS_URL:', WS_URL)
-console.log('Using BACKEND_URL:', BACKEND_URL)
-
 function App() {
   const [rtspUrl, setRtspUrl] = useState('')
   const [notification, setNotification] = useState<{type: 'success' | 'error', message: string} | null>(null)
